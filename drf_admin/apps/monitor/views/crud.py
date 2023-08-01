@@ -2,7 +2,7 @@
 from easyaudit.models import CRUDEvent
 from rest_framework.generics import ListAPIView
 
-from monitor.serializers.crud import CRUDSerializer
+from drf_admin.apps.monitor.serializers.crud import CRUDSerializer
 
 
 class CRUDListAPIView(ListAPIView):

@@ -6,8 +6,8 @@ from apscheduler.triggers.cron import CronTrigger
 from django_apscheduler.models import DjangoJobExecution
 from rest_framework import serializers
 
-from system.jobs import tasks
-from system.jobs.run import scheduler
+from drf_admin.apps.system.jobs import tasks
+from drf_admin.apps.system.jobs.run import scheduler
 
 
 class JobFunctionsSerializer(serializers.Serializer):

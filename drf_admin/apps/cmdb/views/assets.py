@@ -11,9 +11,7 @@ from rest_framework.views import APIView
 
 from cmdb.models import Assets, IDC, Cabinets
 from cmdb.serializers.assets import AssetsAdminSerializer
-from drf_admin.common.models import get_child_ids
 from drf_admin.utils.views import ChoiceAPIView, AdminViewSet
-from system.models import Departments
 
 Users = get_user_model()
 

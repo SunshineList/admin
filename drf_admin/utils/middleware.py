@@ -9,7 +9,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from monitor.models import OnlineUsers
-from oauth.utils import get_request_browser, get_request_os, get_request_ip
+from drf_admin.apps.oauth.utils import get_request_browser, get_request_os, get_request_ip
 
 
 class OperationLogMiddleware:
@@ -43,6 +43,8 @@ class OperationLogMiddleware:
             # 处理token, log中token已******替代真实token值
             if response_body['data'].get('token'):
                 response_body['data']['token'] = '******'
+            if response_body['data'].get('image') and 'data:image' in response_body['data']['image']:
+                response_body['data']['image'] = 'base64图片'
         except Exception:
             response_body = dict()
 

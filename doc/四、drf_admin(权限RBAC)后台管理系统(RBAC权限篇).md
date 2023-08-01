@@ -127,11 +127,11 @@ RBAC(Role-Based Access Control,基于角色的访问控制)，通过角色绑定
                 权限
                 """
             method_choices = (
-                (u'POST', u'增'),
-                (u'DELETE', u'删'),
-                (u'PUT', u'改'),
-                (u'PATCH', u'局部改'),
-                (u'GET', u'查')
+                ('POST', '增'),
+                ('DELETE', '删'),
+                ('PUT', '改'),
+                ('PATCH', '局部改'),
+                ('GET', '查')
             )
         
             name = models.CharField(max_length=30, verbose_name='权限名')

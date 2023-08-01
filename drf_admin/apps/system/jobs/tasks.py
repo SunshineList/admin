@@ -3,7 +3,7 @@
 @desc     : 在此文件中定义任务调度函数, 系统会自动监测该文件内的方法
             ** 建议仅在本文件中定义简介函数, 具体实现逻辑放入warehouse中 **
 """
-from system.jobs.decorators import single_task
+from drf_admin.apps.system.jobs.decorators import single_task
 
 
 @single_task('database_backup')

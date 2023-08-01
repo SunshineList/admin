@@ -2,7 +2,7 @@
 from rest_framework import mixins
 from rest_framework.generics import GenericAPIView
 
-from information.serializers.centre import ChangePasswordSerializer, ChangeInformationSerializer, ChangeAvatarSerializer
+from drf_admin.apps.information.serializers.centre import ChangePasswordSerializer, ChangeInformationSerializer, ChangeAvatarSerializer
 
 
 class ChangePasswordAPIView(mixins.UpdateModelMixin, GenericAPIView):

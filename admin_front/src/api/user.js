@@ -24,3 +24,11 @@ export function logout() {
     method: 'post'
   })
 }
+
+// 获取验证码
+export function captcha() {
+  return request({
+    url: '/oauth/captcha/',
+    method: 'post'
+  })
+}

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.urls import path
 
-from information.views import centre
+from drf_admin.apps.information.views import centre
 
 urlpatterns = [
     path('change-password/', centre.ChangePasswordAPIView.as_view()),  # 修改个人密码

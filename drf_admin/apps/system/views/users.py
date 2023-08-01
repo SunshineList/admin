@@ -8,7 +8,7 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from drf_admin.apps.system.serializers.users import UsersSerializer, UsersPartialSerializer, ResetPasswordSerializer
+from system.serializers.users import UsersSerializer, UsersPartialSerializer, ResetPasswordSerializer
 from drf_admin.utils.views import AdminViewSet
 from system.filters.users import UsersFilter
 from system.models import Permissions

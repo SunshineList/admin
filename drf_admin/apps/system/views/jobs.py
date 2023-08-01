@@ -11,9 +11,9 @@ from rest_framework.generics import ListAPIView, ListCreateAPIView, DestroyAPIVi
 from rest_framework.response import Response
 from rest_framework import mixins
 
-from system.jobs import tasks
-from system.jobs.run import scheduler
-from system.serializers.jobs import JobsListSerializer, JobCreateSerializer, JobFunctionsSerializer, \
+from drf_admin.apps.system.jobs import tasks
+from drf_admin.apps.system.jobs.run import scheduler
+from drf_admin.apps.system.serializers.jobs import JobsListSerializer, JobCreateSerializer, JobFunctionsSerializer, \
     JobUpdateSerializer, JobExecutionsSerializer
 
 

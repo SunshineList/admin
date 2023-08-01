@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.urls import path, include
 
-from cmdb.views import servers, assets
+from drf_admin.apps.cmdb.views import servers, assets
 from drf_admin.utils import routers
 
 router = routers.AdminRouter()

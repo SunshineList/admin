@@ -14,6 +14,16 @@
           <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>
+      <el-form-item prop="captcha">
+        <el-row>
+          <el-col :span="12">
+            <el-input v-model="loginForm.captcha" placeholder="验证码" style="width: 200px" />
+          </el-col>
+          <el-col :span="12">
+            <img v-if="captchaImage" :src="captchaImage" title="点击刷新验证码" style="height:40px;float:right;" @click="fetchCaptcha">
+          </el-col>
+        </el-row>
+      </el-form-item>
       <el-checkbox v-model="loginForm.rememberMe" style="margin:0 0 25px 0;">
         记住我
       </el-checkbox>
@@ -33,10 +43,11 @@
 </template>
 
 <script>
-import { encrypt, decrypt } from '@/utils/rsaEncrypt'
+import { encrypt } from '@/utils/rsaEncrypt'
 import Config from '@/settings'
 import Cookies from 'js-cookie'
 import Background from '@/assets/images/login-bg.jpg'
+import { captcha } from '@/api/user'
 export default {
   name: 'Login',
   data() {
@@ -44,16 +55,20 @@ export default {
       Background: Background,
       cookiePass: '',
       loginForm: {
-        username: '',
-        password: '',
+        username: 'admin',
+        password: '1234qwer',
+        uuid: '',
+        captcha: '',
         rememberMe: false
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', message: '用户名不能为空' }],
-        password: [{ required: true, trigger: 'blur', message: '密码不能为空' }]
+        password: [{ required: true, trigger: 'blur', message: '密码不能为空' }],
+        captcha: [{ required: true, trigger: 'blur', message: '验证码不能为空' }]
       },
       loading: false,
-      redirect: undefined
+      redirect: undefined,
+      captchaImage: ''
     }
   },
   watch: {
@@ -67,6 +82,7 @@ export default {
   created() {
     // 获取用户名密码等Cookie
     this.getCookie()
+    this.getCaptcha()
   },
   methods: {
     getCookie() {
@@ -88,14 +104,13 @@ export default {
           username: this.loginForm.username,
           password: this.loginForm.password,
           rememberMe: this.loginForm.rememberMe,
-          code: this.loginForm.code,
+          captcha: this.loginForm.captcha,
           uuid: this.loginForm.uuid
         }
         if (user.password !== this.cookiePass) {
           user.password = encrypt(user.password)
-        } else {
-          this.loginForm.password = decrypt(user.password)
         }
+        this.loginForm.password = user.password
         if (valid) {
           this.loading = true
           if (user.rememberMe) {
@@ -112,12 +127,23 @@ export default {
             this.loading = false
           }).catch(() => {
             this.loading = false
-            this.getCode()
+            this.loginForm.uuid = ''
+            this.loginForm.captcha = ''
+            this.fetchCaptcha()
           })
         } else {
           return false
         }
       })
+    },
+    getCaptcha() {
+      captcha().then(res => {
+        this.loginForm.uuid = res.data.uuid
+        this.captchaImage = res.data.image
+      })
+    },
+    fetchCaptcha() {
+      this.getCaptcha()
     }
   }
 }
