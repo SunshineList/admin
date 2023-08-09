@@ -1,4 +1,3 @@
-
 import json
 import re
 
@@ -73,3 +72,11 @@ class RbacPermission(BasePermission):
                 return False
             else:
                 return True
+
+
+class CasbinPermission(BasePermission):
+
+    def has_permission(self, request, view):
+        sub = request.user.roles.all()  # 用户角色为主体
+        obj = view.get_object() if hasattr(view, 'get_object') else None
+        act = request.method.lower()

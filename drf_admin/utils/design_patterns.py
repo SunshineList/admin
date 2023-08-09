@@ -70,7 +70,7 @@ class StrategyContext(object):
 
     def execute(self, *args, **kwargs):
         assert self.strategy, "未找到事件类型对应的策略类"
-        return self.strategy.business_strategy(*args, **kwargs)
+        return self.strategy().business_strategy(*args, **kwargs)
 
 
 if __name__ == "__main__":

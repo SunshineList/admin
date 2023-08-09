@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'monitor',
     'cmdb',
     'information',
+    'user_casbin'
 ]
 
 MIDDLEWARE = [
