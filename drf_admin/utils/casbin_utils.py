@@ -1,11 +1,21 @@
 # -*- coding: utf-8 -*-
 import os.path
 import casbin
+import aiohttp, asyncio
 
+# from django.conf import settings
 from django.core.exceptions import PermissionDenied
 
 from drf_admin.settings.dev import BASE_DIR
 
+URL = "http://127.0.0.1:8000"
+async def get_all_swagger_api():
+    async with aiohttp.ClientSession() as session:
+        async with session.get(URL + "/api/swagger.json") as resp:
+            response = await resp.json()
+            all_api_path = response.get("paths")
+            for k, v in all_api_path.items():
+                print(k, v)
 
 class CasbinMiddleware:
     """
@@ -37,4 +47,4 @@ class CasbinMiddleware:
         raise PermissionDenied
 
 
-a = CasbinMiddleware({})
+asyncio.run(get_all_swagger_api())
